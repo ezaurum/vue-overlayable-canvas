@@ -1,6 +1,6 @@
 <template>
   <div class="canvas-wrapper">
-    <canvas></canvas>
+    <canvas @click="clicked"></canvas>
     <div v-if="hasSlot" :class="canvasOverlayClass">
       <slot></slot>
     </div>
@@ -76,6 +76,10 @@ export default {
     },
   },
   methods: {
+    clicked(e) {
+      console.log(e)
+      this.$emit('click', e)
+    },
     resetSize(width, height) {
       this.canvas.width = width
       this.canvas.height = height

@@ -6,8 +6,9 @@
     <oc class="wrapper"
         background="yellow"
         overlay="top right"
+        @click="clicked"
         :opacity="0.4">
-      <div class="menu">
+      <div class="menu" @click="clicked">
         오버레이 메뉴
       </div>
     </oc>
@@ -23,6 +24,11 @@ export default {
   components: {
     oc,
   },
+  methods:{
+    clicked(e) {
+      console.log(e)
+    }
+  }
 }
 </script>
 <style lang="scss">
