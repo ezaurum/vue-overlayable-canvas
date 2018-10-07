@@ -33,12 +33,7 @@ export default {
   },
   computed: {
     hasSlot() {
-      console.log(this.$slots.default)
-      return true
-      /* if (!this.$slots.default) return false
-       if (!this.$slots.default[0].text) return false
-       if (!this.$slots.default[0].text.length) return false
-       return !this.$slots.default[0].text.length*/
+      return !!this.$slots.default
     },
     canvasOverlayClass() {
       return {
