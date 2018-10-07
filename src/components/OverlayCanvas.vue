@@ -33,18 +33,20 @@ export default {
   },
   computed: {
     hasSlot() {
-      if (!this.$slots.default) return false
-      if (!this.$slots.default[0].text) return false
-      if (!this.$slots.default[0].text.length) return false
-      return !this.$slots.default[0].text.length
+      console.log(this.$slots.default)
+      return true
+      /* if (!this.$slots.default) return false
+       if (!this.$slots.default[0].text) return false
+       if (!this.$slots.default[0].text.length) return false
+       return !this.$slots.default[0].text.length*/
     },
     canvasOverlayClass() {
       return {
         'canvas-wrapper__overlay': true,
-        'canvas-wrapper__overlay--bottom': this.overlay === 'bottom',
-        'canvas-wrapper__overlay--top': this.overlay === 'top',
-        'canvas-wrapper__overlay--left': this.overlay === 'left',
-        'canvas-wrapper__overlay--right': this.overlay === 'right',
+        'canvas-wrapper__overlay--bottom': this.overlay.indexOf('bottom') > -1,
+        'canvas-wrapper__overlay--top': this.overlay.indexOf('top') > -1,
+        'canvas-wrapper__overlay--left': this.overlay.indexOf('left') > -1,
+        'canvas-wrapper__overlay--right': this.overlay.indexOf('right') > -1,
       }
     },
   },
@@ -89,6 +91,18 @@ export default {
 }
 
 .canvas-wrapper__overlay {
-
+  position: absolute;
+  &--top {
+    top: 0;
+  }
+  &--bottom {
+    bottom: 0;
+  }
+  &--left {
+    left: 0;
+  }
+  &--right {
+    right: 0;
+  }
 }
 </style>

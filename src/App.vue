@@ -5,7 +5,7 @@
     </div>
     <oc class="wrapper"
         background="yellow"
-        overlay="top"
+        overlay="top right"
         :opacity="0.4">
       <div class="menu">
         오버레이 메뉴
