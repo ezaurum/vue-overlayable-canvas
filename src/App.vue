@@ -4,7 +4,9 @@
       이 클래스는 위로 올라갈 것
     </div>
     <oc class="wrapper"
-        background="yellow"
+        :background="color"
+        :width="width"
+        :height="height"
         overlay="top right"
         @click="clicked"
         :opacity="0.4">
@@ -24,11 +26,20 @@ export default {
   components: {
     oc,
   },
-  methods:{
+  methods: {
     clicked(e) {
-      console.log(e)
+      this.color = 'blue'
+      this.height = 100
+      this.width = 100
+    },
+  },
+  data() {
+    return {
+      color: 'red',
+      width: 300,
+      height: 300,
     }
-  }
+  },
 }
 </script>
 <style lang="scss">
