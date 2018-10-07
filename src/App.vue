@@ -1,29 +1,41 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div>
+    <div class="div2">
+      이 클래스는 위로 올라갈 것
     </div>
-    <router-view/>
+    <oc></oc>
+    <div class="div1">
+      이 클래스는 뒤로 들어갈 것
+    </div>
   </div>
 </template>
+<script>
+import oc from '@/components/OverlayCanvas'
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+export default {
+  components: {
+    oc,
+  },
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+</script>
+<style lang="scss">
+.div1 {
+  &:after {
+    content: '캔버스보다 위';
   }
+  background-color: red;
+  width:100%;
+  height:40px;
+  color:white;
+}
+
+.div2 {
+  &:after {
+    content: '캔버스보다 아래';
+  }
+  background-color: blue;
+  width:100%;
+  height:40px;
+  color:white;
 }
 </style>
