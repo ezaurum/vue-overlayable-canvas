@@ -7,9 +7,13 @@
   </div>
 </template>
 <script>
+import {fabric} from 'fabric'
 
 export default {
   props: {
+    image: {
+      type: String,
+    },
     width: {
       type: Number,
       default: 300,
@@ -21,10 +25,6 @@ export default {
     opacity: {
       type: Number,
       default: 1,
-    },
-    background: {
-      type: String,
-      default: 'transparent',
     },
     overlay: {
       type: String,
@@ -52,37 +52,45 @@ export default {
   },
   data() {
     return {
-      canvas: Object,
-      ctx: Object,
+      canvas: null,
+      canvasEl: null,
     }
   },
   mounted() {
     let canvasElement = this.$el.querySelector('canvas')
-    let ctx = canvasElement.getContext('2d')
-    this.canvas = canvasElement
-    this.ctx = ctx
-    this.canvas.style['background'] = this.background
-    this.canvas.style['opacity'] = this.opacity
+    this.canvasEl = canvasElement
     this.resetSize(this.width, this.height)
+
+    let canvas = new fabric.Canvas(canvasElement)
+    canvas.isDrawingMode = true;
+    canvas.freeDrawingBrush.width = 5;
+    canvas.freeDrawingBrush.color = "#ff0000";
+    canvas.opacity = this.opacity
+    this.canvas = canvas
+
+    if (this.image) {
+      fabric.Image.fromURL(this.image, (img) => {
+        img.left = 0;
+        img.top = 0;
+        canvas.add(img);
+        //img.bringToFront();
+        //canvas.renderAll();
+      });
+      this.canvas.add()
+    }
   },
-  watch: {
-    width(to, from) {
-      const width = to
-      this.resetSize(width, this.height)
-    },
-    height(to, from) {
-      const height = to
-      this.resetSize(this.width, height)
-    },
-  },
+  watch: {},
   methods: {
     clicked(e) {
       console.log(e)
       this.$emit('click', e)
     },
     resetSize(width, height) {
-      this.canvas.width = width
-      this.canvas.height = height
+      this.canvasEl.width = width
+      this.canvasEl.height = height
+    },
+    toDataURL() {
+      return this.canvas.toDataURL('png')
     },
   },
 }
